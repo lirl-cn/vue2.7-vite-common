@@ -1,26 +1,15 @@
-import { sha256 } from 'js-sha256'
 import { message } from 'ant-design-vue';
-export * from './token'
+export * from './auth'
 
 /**
  * 获取uuid
  */
- export function getUUID () {
+export function getUUID() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
     return (c === 'x' ? (Math.random() * 16 | 0) : ('r&0x3' | '0x8')).toString(16)
   })
 }
 
-/**
- * 加密
- * @param message 明文
- * @param salt 加密的盐
- * @returns {*}
- */
-export function msgEncode (message: string):string {
-  // return sha256(sha256(message) + salt)
-  return sha256(message)
-}
 
 /**
  * 生成随机字符串
@@ -28,7 +17,7 @@ export function msgEncode (message: string):string {
  * @param radix 随机字符串的范围
  * @returns {string}
  */
- export const randomStr: (len?: number, radix?: number) => string = (len = 8, radix = 16) => {
+export const randomStr: (len?: number, radix?: number) => string = (len = 8, radix = 16) => {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
   const value = [];
   let i = 0;
@@ -64,11 +53,11 @@ export function msgEncode (message: string):string {
  * @param {string} children 包含子集的字段名称
  * @returns {any[]}
  */
- export const flatArray:<T = any>(arr:T[], children?: string) => T[] = (
+export const flatArray: <T = any>(arr: T[], children?: string) => T[] = (
   arr = [],
   children = 'children',
 ) => {
-  return arr.reduce((pre:any[], cur:any) => {
+  return arr.reduce((pre: any[], cur: any) => {
     if (cur[children]) {
       pre.push(...flatArray(cur[children]));
       pre.push({ ...cur, [children]: undefined });
@@ -84,7 +73,7 @@ export function msgEncode (message: string):string {
  * @param {Object} errors 后台返回的错误信息
  * @param {Object} values 当前表单值
  */
- export const formatResultToAntdFormErrorFields = (errors: any, values: any) => {
+export const formatResultToAntdFormErrorFields = (errors: any, values: any) => {
   if (Object.prototype.toString.call(errors) !== '[object Object]') {
     return {}
   }
@@ -104,34 +93,34 @@ export function msgEncode (message: string):string {
  * @param {number} max 最大值
  * @returns 
  */
- export const formRulesMinMax = (min: number, max: number) => ({ min, max, message: `长度无效, 请限制在 ${min} ~ ${max} 有效字以内` })
+export const formRulesMinMax = (min: number, max: number) => ({ min, max, message: `长度无效, 请限制在 ${min} ~ ${max} 有效字以内` })
 
- /**
-  * 上传接口大小限制通用方法
-  * @param {File} file 文件对象
-  * @param {number} limit 上传限制 mb
-  * @returns {boolean}
-  */
- export const uploadSizeLimit = (file: File, limit = 10) => {
-   const { size } = file;
-   if (size > limit * 1024 * 1024) {
-     message.error(`文件大小不能超过${limit}M`);
-     return Promise.reject(false);
-   } else {
-     return true;
-   }
- }
-
- /**
- * 上传接口文件限制通用方法（后缀）
+/**
+ * 上传接口大小限制通用方法
  * @param {File} file 文件对象
- * @param {string} accept 文件格式限制
+ * @param {number} limit 上传限制 mb
  * @returns {boolean}
  */
-export const uploadSuffixLimit = (file: File, accept:string) => {
+export const uploadSizeLimit = (file: File, limit = 10) => {
+  const { size } = file;
+  if (size > limit * 1024 * 1024) {
+    message.error(`文件大小不能超过${limit}M`);
+    return Promise.reject(false);
+  } else {
+    return true;
+  }
+}
+
+/**
+* 上传接口文件限制通用方法（后缀）
+* @param {File} file 文件对象
+* @param {string} accept 文件格式限制
+* @returns {boolean}
+*/
+export const uploadSuffixLimit = (file: File, accept: string) => {
   const { name } = file;
   /* 取出文件后缀 */
-  const suffix = name.split('.').pop(); 
+  const suffix = name.split('.').pop();
   /* 取出限制后缀列表 */
   const _accept = accept ? accept.split(',').map(item => item.replace(/\./g, '')) : [];
   if (accept && _accept.indexOf(suffix as string) === -1) {
@@ -147,8 +136,8 @@ export const uploadSuffixLimit = (file: File, accept:string) => {
  * @param {any[]} arr 数据源
  * @param {number} chunk 分割数量
  * @returns 
- */ 
- export const splitArray = (arr:Array<any>, chunk = 4) => {
+ */
+export const splitArray = (arr: Array<any>, chunk = 4) => {
   const result = [];
   for (var i = 0, j = arr.length; i < j; i += chunk) {
     result.push(arr.slice(i, i + chunk))
@@ -162,8 +151,8 @@ export const uploadSuffixLimit = (file: File, accept:string) => {
  * @param {string} value map对应value的key，不传则为整个对象
  * @returns {object}
  */
-export const listToMap = (list:Array<any>, key = 'id', value = undefined) => {
-  let obj:objString = {};
+export const listToMap = (list: Array<any>, key = 'id', value = undefined) => {
+  let obj: objString = {};
   list.forEach(item => {
     obj[item[key]] = value ? item[value] : item;
   })
@@ -181,7 +170,7 @@ export const encode = (str: string | number) => {
 /**
  * 将数组格式转换成antd大多数组件的格式 {label: string, value: string, children: own[]}[]
  */
- export const formatListToAntdList: (list:any[], label?: string, value?: string, children?: string) => any[] = (list, label = 'name', value, children = 'children') => {
+export const formatListToAntdList: (list: any[], label?: string, value?: string, children?: string) => any[] = (list, label = 'name', value, children = 'children') => {
   return list.map(item => ({
     ...item,
     label: item[label],
