@@ -1,0 +1,21 @@
+declare module 'slash2';
+declare module '*.css';
+declare module '*.less';
+declare module '*.scss';
+declare module '*.sass';
+declare module '*.svg';
+declare module '*.png';
+declare module '*.jpg';
+declare module '*.jpeg';
+declare module '*.gif';
+declare module '*.bmp';
+declare module '*.tiff';
+declare module '*.vue';
+declare module 'omit.js';
+declare module 'numeral';
+declare module 'bizcharts-plugin-slider';
+
+declare module 'vue-cookie';
+declare module 'vue-codemirror';
+declare module 'element-ui/lib/locale/lang/zh-CN';
+declare module 'ant-design-vue/es/locale/zh_CN';
