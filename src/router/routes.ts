@@ -1,13 +1,13 @@
 import type { RouteConfig } from 'vue-router'
-export interface ownRouteConfig extends Omit<RouteConfig, 'component' | 'children'>{
-  component?: string | {template: string}
+export interface ownRouteConfig extends Omit<RouteConfig, 'component' | 'children'> {
+  component?: string | { template: string }
   title?: string
   icon?: string
   hideInMenu?: boolean
   hideChildrenInMenu?: boolean
   children?: ownRouteConfig[]
 }
-const routes:ownRouteConfig[] = [
+const routes: ownRouteConfig[] = [
   {
     path: '/home',
     name: 'home',
@@ -19,6 +19,10 @@ const routes:ownRouteConfig[] = [
     name: 'about',
     title: 'about',
     component: '/about/index',
+  },
+  {
+    path: '/',
+    redirect: '/home'
   },
   {
     path: '*',

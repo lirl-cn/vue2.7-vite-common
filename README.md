@@ -1,14 +1,15 @@
 # vite+vue2.7-common
-node版本限制 v16+
-## 运行
-```base
-cd front-end
-yarn 
-yarn start
+基于 vite3+vue2.7的开箱即用架子，UI库引入了antd与@lirl-cn/v2c，可根据自身需要进行删减配置；
+> @lirl-cn/v2c是基于element UI二次封装开发的UI库，内置了快速生成表单和表格的组件，体验极好
+
+## 启动
+``` base
+yarn
+yarn dev
 ```
-## 打包编译
-```
-cd front-end
+
+## 打包
+``` base
 yarn build
 ```
 
