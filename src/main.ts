@@ -2,8 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import CnV2C, { MessageBox } from "@lirl-cn/v2c"; // 基于element UI 
+import CnV2C from "@lirl-cn/v2c"; // 基于element UI 
 import * as Antd from 'ant-design-vue';
+import { MessageBox } from 'element-ui';
 import moment from 'moment';
 import request from '@/utils/request'
 import 'moment/dist/locale/zh-cn';
